@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Scanner" default="docs">
+
+	<property file="build.properties" />
+
+	<target name="clean">
+		<echo>Cleaning ...</echo>
+		<!--delete dir="${bin.dir}" /-->
+		<delete dir="${jar.dir}" />
+	</target>
+
+	<target name="init" depends="clean">
+		<echo>Initializing ...</echo>
+		<!--mkdir dir="${bin.dir}" /-->
+		<mkdir dir="${jar.dir}" />
+	</target>
+
+	<target name="compile" depends="init">
+		<echo>Compiling ...</echo>
+		<!--javac srcdir="${src.dir}" destdir="${bin.dir}">
+			<classpath>
+				<fileset dir="${lib.dir}">
+					<include name="*.jar" />
+				</fileset>
+			</classpath>
+		</javac-->
+	</target>
+
+	<target name="build" depends="compile">
+		<echo>Building ...</echo>
+		<jar destfile="${jar.dir}/${jar.file}">
+			<fileset dir="${bin.dir}" />
+		</jar>
+	</target>
+
+	<target name="docs" depends="build">
+		<echo>Documenting ...</echo>
+		<java classname="org.jboss.weld.environment.se.StartMain" fork="true">
+			<arg value="${src.dir}" />
+			<arg value="${test.dir}" />
+			<arg value="${docs.dir}" />
+
+			<classpath>
+				<fileset dir="${lib.dir}">
+					<include name="*.jar" />
+				</fileset>
+
+				<fileset dir="${jar.dir}">
+					<include name="*.jar" />
+				</fileset>
+			</classpath>
+		</java>
+	</target>
+
+</project>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scanner domain="br.com.company" project="project">
+	<structure>
+		<package>org.wave.example.core</package>
+	</structure>
+</scanner>
